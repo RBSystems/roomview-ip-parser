@@ -1,6 +1,6 @@
 {
-  "Roomviewfolder": "./AddressBooks",
-	"RoomviewFileNames": [
+  "AddressBooksDirectory": "./address-books",
+	"RoomviewAddressBooks": [
     "Roomview_HD_4.2_plus_A-I.rvd",
     "Roomview_HD_4.2_plus_J.rvd",
     "Roomview_HD_4.2_plus_K-S.rvd",
