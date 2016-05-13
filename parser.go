@@ -10,7 +10,7 @@ func main() {
 	config := helpers.ImportConfig("./config.json")
 	helpers.Maps = make(map[string][]helpers.Host)
 
-	toReturn := []helpers.Host{}
+	addresses := []helpers.Host{}
 	for file := range config.RoomviewAddressBooks {
 		hosts, err := helpers.ParseFile(config.AddressBooksDirectory+"/"+config.RoomviewAddressBooks[file], config)
 		if err != nil {
@@ -18,19 +18,16 @@ func main() {
 			return
 		}
 
-		toReturn = append(toReturn, hosts...)
+		addresses = append(addresses, hosts...)
 	}
 
-	toReturn = []helpers.Host{}
+	addresses = []helpers.Host{}
 
 	for _, v := range helpers.Maps {
-		toReturn = append(toReturn, v[0])
+		addresses = append(addresses, v[0])
 	}
 
-	// helpers.OutputToJSON(toReturn)
-	// helpers.OutputToTxt(toReturn)
-
-	ips := helpers.TranslateToTP(toReturn)
+	ips := helpers.TranslateToTP(addresses)
 	helpers.OutputToJSON(ips)
 	helpers.OutputToTxt(ips)
 }
