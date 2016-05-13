@@ -6,17 +6,17 @@ import (
 	"os"
 )
 
-func OutputToJSON(toWrite interface{}, file string) {
+func OutputToJSON(toWrite interface{}) {
 	b, err := json.Marshal(toWrite)
 
-	err = ioutil.WriteFile(file+".json", b, 0644)
+	err = ioutil.WriteFile("output.json", b, 0644)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func OutputToTxt(toWrite []Host, file string) {
-	f, err := os.Create(file + ".txt")
+func OutputToTxt(toWrite []Host) {
+	f, err := os.Create("output.txt")
 	if err != nil {
 		panic(err)
 	}

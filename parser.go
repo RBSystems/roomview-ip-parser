@@ -1,16 +1,21 @@
 package main
 
-import "github.com/byuoitav/roomview-ip-parser/helpers"
+import (
+	"fmt"
+
+	"github.com/byuoitav/roomview-ip-parser/helpers"
+)
 
 func main() {
 	config := helpers.ImportConfig("./config.json")
 	helpers.Maps = make(map[string][]helpers.Host)
 
 	toReturn := []helpers.Host{}
-	for f := range config.RoomviewFileNames {
-		hosts, err := helpers.ParseFile(config.Roomviewfolder+"/"+config.RoomviewFileNames[f], config)
+	for file := range config.RoomviewAddressBooks {
+		hosts, err := helpers.ParseFile(config.AddressBooksDirectory+"/"+config.RoomviewAddressBooks[file], config)
 		if err != nil {
-			panic(err)
+			fmt.Println("Could not read file: " + err.Error())
+			return
 		}
 
 		toReturn = append(toReturn, hosts...)
@@ -22,9 +27,10 @@ func main() {
 		toReturn = append(toReturn, v[0])
 	}
 
-	helpers.OutputToJSON(toReturn, config.OutputFile)
-	helpers.OutputToTxt(toReturn, config.OutputFile)
+	// helpers.OutputToJSON(toReturn)
+	// helpers.OutputToTxt(toReturn)
 
 	ips := helpers.TranslateToTP(toReturn)
-	helpers.OutputToTxt(ips, config.OutputFile+"IPs")
+	helpers.OutputToJSON(ips)
+	helpers.OutputToTxt(ips)
 }

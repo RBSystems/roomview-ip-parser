@@ -4,7 +4,6 @@ type Configuration struct {
 	AddressBooksDirectory string
 	RoomviewAddressBooks  []string
 	RoomRegex             string
-	OutputFile            string
 }
 
 type Host struct {
